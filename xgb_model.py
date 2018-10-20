@@ -27,7 +27,7 @@ x = x / 255.0
 
 train_x = np.load(os.path.join(train_path, 'extra.npy'))
 train_y_ohe = np.load(os.path.join(train_path, 'ohelabels.npy'))
-train_y_codes = [y.argmax() for y in train_y_ohe]
+train_y_codes = np.array([y.argmax() for y in train_y_ohe])
 
 val_x = np.load(os.path.join(test_path, 'extra.npy'))
 val_y_ohe = np.load(os.path.join(test_path, 'ohelabels.npy'))
