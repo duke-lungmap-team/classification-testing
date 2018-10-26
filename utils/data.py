@@ -412,7 +412,7 @@ def get_training_data_for_image_set(image_set_dir):
     # The keys will still be the image names
     training_data = {}
 
-    for image_name, sub_regions in regions_json.items():
+    for image_name, regions_dict in regions_json.items():
         tmp_image = Image.open(os.path.join(image_set_dir, image_name))
         tmp_image = np.asarray(tmp_image)
 
@@ -423,18 +423,20 @@ def get_training_data_for_image_set(image_set_dir):
             'regions': []
         }
 
-        for region in sub_regions:
-            points = np.empty((0, 2), dtype='int')
+        for label, regions in regions_dict.items():
 
-            for point in sorted(region['points'], key=itemgetter('order')):
-                points = np.append(points, [[point['x'], point['y']]], axis=0)
+            for region in regions:
+                points = np.empty((0, 2), dtype='int')
 
-            training_data[image_name]['regions'].append(
-                {
-                    'label': region['anatomy'],
-                    'points': points
-                }
-            )
+                for point in region:
+                    points = np.append(points, [[point[0], point[1]]], axis=0)
+
+                training_data[image_name]['regions'].append(
+                    {
+                        'label': label,
+                        'points': points
+                    }
+                )
 
     return training_data
 
