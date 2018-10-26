@@ -14,7 +14,7 @@ train_path = os.path.join(cwd, parent_dir, train_dir)
 test_dir = "_".join(['test', 'numpy', opt_str])
 test_path = os.path.join(cwd, parent_dir, test_dir)
 
-image_set_dir = os.path.join(cwd, 'data/image_set_73')
+image_set_dir = os.path.join(cwd, 'data')
 test_img_name = '2015-04-029_20X_C57Bl6_E16.5_LMM.14.24.4.46_SOX9_SFTPC_ACTA2_001.tif'
 
 if not os.path.exists(train_path):
